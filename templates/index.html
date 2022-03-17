@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Musu</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  </head>
+  <body class="musi">
+    <div class="container">
+      <h2 style="text-align: center; color:rgb(98, 8, 110)">Hello! I am Musu.</h2>
+      <h1 style="text-align: center; color:rgb(98, 8, 110)">Ask Me Your Query</h1>
+      
+      <br>
+      <hr>
+      <br>
+
+        <div class="row">
+          <div class="col-lg-9">
+            <input class="form-control"  type="text" name="question" id="question">
+          </div>
+          <div class="col-lg-3">
+            <button class="btn btn-primary btn-block" id="submit-button">Send</button>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col">
+            <p id="response"></p>
+          </div>
+        </div>
+
+    </div>
+    <style>
+      .me{
+        margin-left: 15px;
+        display: inline-flex;
+        border-radius: 25px;
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: sans-serif;
+        background: #ad5389;  /* fallback for old browsers */
+        background: linear-gradient(to top, #3c1053, #ad5389);   /* Chrome 10-25, Safari 5.1-6 */
+        background: -webkit-linear-gradient(to bottom, #3c1053, #ad5389); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+      }
+      .res{
+        margin-left: 15px;
+        display: inline-flex;
+        border-radius: 25px;
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: bold;
+        font-family: sans-serif;
+        background: #6199aa;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to bottom, #75144d, #6199aa);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to top, #75144d, #6199aa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+      }
+      .container{
+          border: 5px solid black;
+          padding: 50px;
+          border-radius: 25px;
+          overflow-y: auto;
+          height: 85vh;
+          margin-top: 50px;
+          margin-bottom: 50px;
+          background-color:#fff;
+          
+
+      }
+      .form-control{
+        border-radius: 25px;
+        height: 50px;
+      }
+      .btn-block{
+        height: 50px;
+        border-radius: 25px;
+        font-weight: 900;
+        font-size: 25px;
+        background: #ad5389;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #3c1053, #ad5389);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #3c1053, #ad5389); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+      }
+
+      .musi{
+        background: #4e54c8;  /* fallback for old browsers */
+        background: -webkit-linear-gradient(to right, #8f94fb, #4e54c8);  /* Chrome 10-25, Safari 5.1-6 */
+        background: linear-gradient(to right, #8f94fb, #4e54c8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+      }
+
+    </style>
+    <script src="/static/jquery.min.js" ></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  
+    <script>
+
+
+      jQuery(document).ready(function() {
+
+        $("#submit-button").click(function(e) {
+          e.preventDefault();
+
+
+          $.ajax({
+              type: "POST",
+              url: "chatbot",
+              
+              data: {
+                  question: $("#question").val()
+              },
+              success: function(result) {
+                $("#response").append("<br>User :<pre class='me'>"+$("#question").val()+"</pre>"+ "<br> Musu:"+"<pre class='res'>"+result.response+"</pre>");
+                $("#question").val("")
+              },
+              error: function(result) {
+                  alert('error');
+              }
+          });
+
+
+
+        });
+
+      });
+
+
+    </script>
+
+  </body>
+</html>
