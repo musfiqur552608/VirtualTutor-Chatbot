@@ -38,7 +38,7 @@ raw = raw.lower()
 sent_tokens = nltk.sent_tokenize(raw)
 
 def wikipedia_data(input):
-    reg_ex = re.search('tell me about (.)', input) #or re.search('what is (.)', input)
+    reg_ex = re.search('tell me about (.*)', input) #or re.search('what is (.)', input)
     try:
         if reg_ex:
             topic = reg_ex.group(1)
@@ -98,7 +98,7 @@ def generateResponse(user_response, raw):
     flat = vals.flatten()
     flat.sort()
     text = re.sub(r'[^\w\s]', '', user_response)
-    text_tokens = word_tokenize(text)
+    text_tokens = text.split(" ")
     tokens_without_sw = [word for word in text_tokens if not word in stopwords.words()]
     print(tokens_without_sw)
     # print("User response: {b}".format(b=user_response))

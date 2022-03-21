@@ -74,7 +74,7 @@ def generateResponse(user_response):
         robo_response = robo_response+sent_tokens[idx]
         return robo_response#wikipedia search
 def wikipedia_data(input):
-    reg_ex = re.search('tell me about (.)', input) #or re.search('what is (.)', input)
+    reg_ex = re.search('tell me about (.*)', input) #or re.search('what is (.)', input)
     try:
         if reg_ex:
             topic = reg_ex.group(1)
